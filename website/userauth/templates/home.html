@@ -11,10 +11,23 @@
         <div class="container" style="border:2px solid black;box-shadow:5px 5px 5px black"> 
         <h1 class="font-weight-bold text-center">Welcome to Impressario!!</h1>
         <h3>
-        {{user.username}}
+        {{account.user.username}}
         </h3>
         <h3>
-        {{user.email}}
+        {{account.user.email}}
+        </h3>
+        <br>
+        <h3>
+        {{account.profile.first_name}} {{account.profile.last_name}}
+        </h3>
+        <br>
+
+        <h3>
+        {{account.profile.phone_number}} 
+        </h3>
+        <br>
+        <h3>
+        {{account.profile.gender}} 
         </h3>
         
         <a class="btn btn-danger mx-20 my-10" href="/userauth/logout">
