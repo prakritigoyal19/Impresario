@@ -20,4 +20,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('userauth/',include('userauth.urls')),
     path('account_settings/',include('account_settings.urls')),
+    path('scheduling',include('scheduling.urls')),
 ]
