@@ -24,7 +24,7 @@
         <h3>
         Fill all the details to continue..
         </h3>
-        <form action="/userauth/register/" method="POST">
+        <form action="{% url 'register' %}" method="POST">
         {% csrf_token %}
            <div class="form-group">
            
@@ -80,7 +80,7 @@
         
        
   <button type="submit" class="btn btn-primary">Register</button>
-  <a href="/userauth" class="btn btn-danger">Cancel</a>
+  <a href="{% url 'index' %}" class="btn btn-danger">Cancel</a>
         
 
         </div>
@@ -88,7 +88,7 @@
  {% csrf_token %}
  <p class="text-center">
   Already have an account?
-  <a class="font-weight-bold" href="/userauth/login">
+  <a class="font-weight-bold" href="{% url 'login' %}">
 Login
   </a>
   </p>

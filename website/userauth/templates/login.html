@@ -20,7 +20,7 @@
         {% endif %}    
 
         <h1 class="font-weight-bold text-center">Login</h1>
-        <form action="/userauth/login/" method="POST">
+        <form action="{% url 'login'%}" method="POST">
  {% csrf_token %}
 
            <div class="form-group">
@@ -38,7 +38,7 @@
        
   <button type="submit" class="btn btn-success"> Login</button>
   
-  <a href="/userauth" class="btn btn-danger">Cancel</a>
+  <a href="{% url 'index' %}" class="btn btn-danger">Cancel</a>
         
 
         </div>
@@ -46,7 +46,7 @@
 
   <p class="text-center">
   New to impressario?
-  <a class="font-weight-bold" href="/userauth/register">
+  <a class="font-weight-bold" href="{% url 'register' %}">
 Register
   </a>
   </p>
