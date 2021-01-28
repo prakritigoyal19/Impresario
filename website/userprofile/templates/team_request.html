@@ -1,0 +1,33 @@
+{% extends 'base.html' %} {% load static%} {% block content %}
+{% for request in team_request %}
+<div id="{{request.id}}">
+  {{request}}
+  <button id="approve-{{request.id}}" onclick= "approve_or_reject('{{request.id}}',1)">
+    Approve
+  </button>
+  <button id="reject-{{request.id}}" onclick="approve_or_reject('{{request.id}}',0)">
+    Reject</button><br />
+</div>
+{% endfor %}
+
+  <script>
+     function approve_or_reject(id, approve) {
+    $.ajax({
+      type: "GET",
+      url: "{% url 'ajax_change_status' %}",
+      data: {
+        request_id: id,
+        request_status: approve,
+      },
+      dataType: "json",
+      success: function (data) {
+        if (data.success) {
+          $("#" + id).html(data.status);
+        } else {
+          $("#" + id).append("<p>Something went wrong</p>");
+        }
+      },
+    });
+  }
+  </script>
+{% endblock %}

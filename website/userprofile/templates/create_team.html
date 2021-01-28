@@ -1,0 +1,32 @@
+{% extends 'base.html' %} {% load static%} {% block content %}
+<a href="{% url 'logout' %}">logout</a>
+<form method="post" }>
+  {% csrf_token %}
+  <label for="team_name">team name:</label><br />
+  <input type="text" id="team_name" name="team_name" required /><br />
+  <textarea
+    name="description"
+    id="description"
+    cols="30"
+    rows="10"
+    placeholder="team description"
+  >
+  </textarea> <br />
+  <label for="team_members">team members:</label><br />
+  <div id="team_members" multiple="true" name="team_mem"></div>
+  <br />
+  <button type="submit">create team</button><br />
+  {% if warning%} {{warning}} {% endif %}
+</form>
+<script>
+  var ids = [];
+  var names = [];
+  var admin = [];
+  ("{% for membership in memberships %}");
+  ids.push("{{membership.user.id}}");
+  names.push("{{membership.user}}");
+  admin.push("{{membership.role}}");
+  ("{% endfor %}");
+</script>
+<script src="{% static 'js/create_team.js' %}"></script>
+{% endblock %}

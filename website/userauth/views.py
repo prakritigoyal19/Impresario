@@ -8,9 +8,9 @@ def index(request):
     return render(request,'index.html',{})
     
 def register_user(request):
-    if request.method=='POST':
+    if request.method == 'POST':
         try:
-            prevuser=User.objects.get(username=request.POST['username'])
+            prevuser = User.objects.get(username=request.POST['username'])
             return render(request,'register.html',{'error_message':"User already exists!!"})
         except User.DoesNotExist:
             if request.POST['password']==request.POST['password2']:
