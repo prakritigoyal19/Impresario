@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'userauth.apps.UserauthConfig',
     'scheduling.apps.SchedulingConfig',
+    'userprofile.apps.UserprofileConfig',
 
 ]
 
@@ -80,11 +81,10 @@ WSGI_APPLICATION = 'impresario.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'database_name',
+        'NAME': 'database_name',        
         'USER': 'username',
         'PASSWORD':'pwd',
         'HOST':'localhost',
-    }
 }
 
 
