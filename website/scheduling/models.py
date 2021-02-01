@@ -5,7 +5,6 @@ from django.contrib.auth.models import User
 class Organization(models.Model):
     name = models.CharField(blank = False, max_length = 100)
     parent_org = models.ForeignKey('self',default = None, null = True, blank = True, on_delete = models.CASCADE)
-    
     def __str__(self):
         if self.parent_org:
             parent = "-"+self.parent_org.name
@@ -95,4 +94,5 @@ class Teamrequest(models.Model):
         tr.team_members.set(members)
         tr.save()
         print(tr)
+
 
