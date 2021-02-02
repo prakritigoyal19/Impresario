@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
-
+from swingtime import models as swingtime
 # Create your models here.
 class Organization(models.Model):
     name = models.CharField(blank = False, max_length = 100)
@@ -94,5 +94,9 @@ class Teamrequest(models.Model):
         tr.team_members.set(members)
         tr.save()
         print(tr)
+
+class GroupEvent:
+    event = models.OneToOneField(swingtime.Event,on_delete=models.CASCADE)
+    organisation = models.ForeignKey(Organization,on_delete=models.CASCADE,related_name='org')
 
 
