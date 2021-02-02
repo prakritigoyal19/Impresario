@@ -14,10 +14,11 @@
         Register/ Login to continue
         </h3>
         <div class="d-flex flex-row justify-content-around my-20">
-        <a class="btn btn-primary mx-20 my-10" href="/userauth/login">
+        <a class="btn btn-primary mx-20 my-10" href="{% url 'login' %}" >
         LOGIN
         </a>
-        <a class="btn btn-primary mx-10 my-10" href="/userauth/register">
+   
+        <a class="btn btn-primary mx-10 my-10" href="{% url 'register' %}">
         REGISTER
         </a>
        

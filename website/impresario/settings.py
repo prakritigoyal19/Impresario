@@ -85,7 +85,9 @@ DATABASES = {
         'NAME': 'impressario',
         'USER': 'aritra',
         'PASSWORD':'admin',
-}
+
+        'HOST':'localhost',
+    }
 }
 
 
