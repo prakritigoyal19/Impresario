@@ -107,18 +107,18 @@ def add_event(request, org_id):
             location = request.POST['location']
             all_events = Event.objects.all()
             clash_events = []
-            for e in all_events:
-                if is_time_between(start,end, e.start_time) or is_time_between(start,end, e.end_time) or is_time_between(e.start_time,e.end_time, end) or is_time_between(e.start_time,e.end_time, start):
-                    clash_events.append(e)
+            # for e in all_events:
+            #     if is_time_between(start,end, e.start_time) or is_time_between(start,end, e.end_time) or is_time_between(e.start_time,e.end_time, end) or is_time_between(e.start_time,e.end_time, start):
+            #         clash_events.append(e)
 
             members = Membershiplevel.objects.filter(organization = org).values('user')
     
-            for c in clash_events:
-                org2  = c.organization
-                mem2 = Membershiplevel.objects.filter(organization = org2).values('user')
-                for m in mem2:
-                    if m in members:
-                        return render(request,'add_event.html',{"warning": "Clashes!!!!","org":org})
+            # for c in clash_events:
+            #     org2  = c.organization
+            #     mem2 = Membershiplevel.objects.filter(organization = org2).values('user')
+            #     for m in mem2:
+            #         if m in members:
+            #             return render(request,'add_event.html',{"warning": "Clashes!!!!","org":org})
             attendees = []
            
             for m in members:
