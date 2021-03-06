@@ -1,6 +1,6 @@
 {% load my_filter %}
 
-{%for org in listo%} 
+{% for org in listo %} 
     {{""|indent_it:org.1}}<a href="{% url 'orgDetail' org.2 %}">{{org.0}}</a>
     <br>
 {% endfor %}

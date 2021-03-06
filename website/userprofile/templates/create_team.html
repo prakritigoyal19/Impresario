@@ -1,6 +1,6 @@
 {% extends 'base.html' %} {% load static%} {% block content %}
 <a href="{% url 'logout' %}">logout</a>
-<form method="post" }>
+<form method="post" >
   {% csrf_token %}
   <label for="team_name">team name:</label><br />
   <input type="text" id="team_name" name="team_name" required /><br />

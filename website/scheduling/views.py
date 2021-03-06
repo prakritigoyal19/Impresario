@@ -57,7 +57,8 @@ def make_listo(node,adj,name_dict,depth,listo):
 
 
 def orgdetail(request,org_id):
-    org =  Organization.objects.get(pk = org_id).name
+    org =  Organization.objects.get(pk = org_id)
     child_org = Organization.objects.filter(parent_org = org_id)
+    members = Membershiplevel.objects.filter(organization = org)
     print(child_org)
-    return render(request,'orgdetail.html',{'child_org':child_org, 'org':org, 'par_id':org_id})
+    return render(request,'orgdetail.html',{'child_org':child_org, 'org':org, 'par_id':org_id, "members":members})
