@@ -11,7 +11,36 @@
     <a href="{% url 'orgDetail' child.id %}">{{child.name}}</a>
     <br>
     {% endfor %}
-    <a href="{% url 'team_request' par_id %}">team requests</a>
-    <a href="{% url 'create_team' par_id %}">create_team</a>
+    <h3> Members: </h3>
+</ul>
+
+{% for m in members %}
+    {% if m.role == 1 %}
+    <li>{{m.user.username}} (Admin) </li>
+    {% else %}
+    <li>{{m.user.username}}</li>
+    {% endif %}
+{% endfor %} 
+</ul>
+
+<h3> Upcoming Events: </h3>
+</ul>
+
+{% for e in org.event.all %}
+    
+    <li>
+    <a href = "/userprofile/view_event/{{ e.id }}">
+    {{ e.title}}
+    </a>
+    </li>
+{% endfor %} 
+</ul>
+    <a href = "/userprofile/{{ org.id }}/add_event">
+    Add event 
+    </a>
+<br>
+<a href="{% url 'team_request' par_id %}">team requests</a>
+<br>    
+<a href="{% url 'create_team' par_id %}">create_team</a>
 </body>
 </html>

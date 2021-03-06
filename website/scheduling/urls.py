@@ -5,5 +5,5 @@ appname='userprofile'
 
 urlpatterns = [
     path('',views.org_tree,name="index"),
-    path('scheduling/<int:org_id>',views.orgdetail,name="orgDetail"),
+    path('/<int:org_id>',views.orgdetail,name="orgDetail"),
 ]
