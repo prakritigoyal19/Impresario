@@ -20,7 +20,7 @@
     </div> -->
 
     <!-- Login Form -->
-    <form "{% url 'userauth:change_password' %}" method='post'>
+    <form action="{% url 'userauth:change_password' %}" method='post'>
     {%csrf_token%}
     	<h1>Change Password</h1>
       <input type="text" id="current password" class="fadeIn second" name="cur_password" placeholder="current password">
