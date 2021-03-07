@@ -33,7 +33,7 @@
 
 /* Style page content */
 .main {
-  margin-right: 300px; /* Same as the width of the sidebar */
+  margin: 30px; /* Same as the width of the sidebar */
   padding: 0px 10px;
   font-family: "Varela Round";
   background-color: #0f0f0f;
@@ -53,12 +53,14 @@ background-color: #57C0AB;
   font-size: 20px;
   font-weight: bold;
   font-family: "Varela Round";
+  padding: 5px;
 }
 
 body {
   font-family: "Varela Round";
   font-weight: 580;
   background-color: #57C0AB;
+  padding: 5px;
 }
 h2 {
   font-size: 46px;
