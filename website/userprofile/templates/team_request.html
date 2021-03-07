@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static%} {% block content %}
+{% extends 'adminbase.html' %} {% block title %} Team Requests {% endblock %} {% load static%} {% block body%}
 {% for request in team_request %}
 <div id="{{request.id}}">
   {{request}}

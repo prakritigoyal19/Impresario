@@ -1,5 +1,15 @@
-{% extends 'base.html' %} {% load static%} {% block content %}
-<a href="{% url 'logout' %}">logout</a>
+{% extends 'adminbase.html' %} 
+{% block title %} Create team {% endblock %}
+
+{% block active %} <li><a href="{% url 'userauth:home' %}">HOME</a></li>
+      <li ><a href="/scheduling">EXISTING TEAMS</a></li>  
+      <li class="active" ><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
+      {% comment %} <li><a href="#">TEAM REQUESTS</a></li> {% endcomment %}
+      <li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+{% endblock %}
+{% load static%}
+{% block body %}
+<a href="{% url 'userauth:logout' %}">logout</a>
 <form method="post" >
   {% csrf_token %}
   <label for="team_name">team name:</label><br />

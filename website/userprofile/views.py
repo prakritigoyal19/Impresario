@@ -23,12 +23,36 @@ def create_team(request,par_id) :
             elif Membershiplevel.objects.get(user_id = request.user.id,organization_id = par_id).role == 1 : #If user is an admin
                 org = Organization.objects.create(name = team_name,parent_org_id = par_id)
                 members = User.objects.filter(pk__in = members)
-                Membershiplevel.create_team(members,org,par_id)
+                #Membershiplevel.create_team(members,org,par_id)
+                Membershiplevel.create_team(members,org,par_id,request.user.id)
                 warning = "team created"
             else :
                 Teamrequest.create_team_req(user,team_name,description,par_id,members) #If user is a participant
                 warning = "team request sent to admin"
         memberships = Membershiplevel.objects.filter(organization__id = par_id)
+        return render(request,'create_team.html',{'memberships':memberships,'warning':warning},)
+    else:
+        return redirect('/userauth/login')
+
+def create_new_team(request):
+
+    if request.user.is_authenticated:
+        warning = ''
+        if request.method == 'POST':
+            team_name = request.POST['team_name']
+            members = request.POST.getlist('team_mem')
+            user=request.user
+            description = request.POST['description']
+            if Organization.objects.filter(name = team_name,parent_org__id = None).exists():
+                warning = "team with that name already exists"
+            else:
+                org = Organization.objects.create(name = team_name,parent_org_id = None)
+                members = User.objects.filter(pk__in = members)
+                Membershiplevel.create_team(members,org,None,request.user.id)
+                #Membershiplevel.create_team(members,org,par_id)
+                warning = "team created"
+        memberships = Membershiplevel.objects.all()
+        print(memberships)
         return render(request,'create_team.html',{'memberships':memberships,'warning':warning},)
     else:
         return redirect('/userauth/login')
@@ -209,3 +233,6 @@ def update_event(request,event_id):
         event.save()
         return redirect('/userprofile/view_event/'+str(event.id))
     return render(request, 'update_event.html', {"event": event})
+
+def view_calendar(request):
+    return render(request,'calendar.html')
