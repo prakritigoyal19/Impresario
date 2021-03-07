@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+{% extends 'adminbase.html' %} 
+{% block title %} Create team {% endblock %}
+{% load static%}
+{% block body %}
+<a href="{% url 'userauth:logout' %}">logout</a>
     <h1>{{org}}</h1>
     {% for child in child_org %}
     <a href="{% url 'orgDetail' child.id %}">{{child.name}}</a>
@@ -42,5 +39,4 @@
 <a href="{% url 'team_request' par_id %}">team requests</a>
 <br>    
 <a href="{% url 'create_team' par_id %}">create_team</a>
-</body>
-</html>
+{% endblock %}

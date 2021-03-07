@@ -48,11 +48,26 @@ class Membershiplevel(models.Model):
         return self.user.username+"-"+self.organization.name
 
     @classmethod
-    def create_team(self,members,org,par_id):
+    def create_team(self,members,org,par_id,u):
+        # for member in members :
+        #     role_in_par=self.objects.get(user_id=member.id,organization_id=par_id)
+        #     m = self.objects.create(user=member,organization=org,hierarchy=role_in_par.hierarchy,role=role_in_par.role)
+        #     print(m)
         for member in members :
-            role_in_par=self.objects.get(user_id=member.id,organization_id=par_id)
-            m = self.objects.create(user=member,organization=org,hierarchy=role_in_par.hierarchy,role=role_in_par.role)
-            print(m)
+            if par_id is not None:
+                role_in_par=self.objects.get(user_id=member.id,organization_id=par_id)
+                if u == member.id :
+                    m = self.objects.create(user=member,organization=org,hierarchy=role_in_par.hierarchy,role=1)
+                else:
+                    m = self.objects.create(user=member,organization=org,hierarchy=role_in_par.hierarchy,role=role_in_par.role)
+
+            else:
+                role_in_par=self.objects.get(user_id=member.id)
+                if u == member.id :
+                    m = self.objects.create(user=member,organization=org,hierarchy=1,role=1)
+                else:
+                    m = self.objects.create(user=member,organization=org,hierarchy=1,role=2)
+
     @classmethod
     def get_subgroups(self, groups, user):
         subgroups = []

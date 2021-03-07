@@ -70,15 +70,15 @@ def change_password(request):
         
         if check is None:
             messages.info(request,'Current Password is not correct!!!')
-            return redirect('change_password')
+            return redirect('userauth:change_password')
         if(pwd==pwd2):            
             user.set_password(pwd)
             user.save()
             update_session_auth_hash(request, user)
             messages.info(request,'Password changed successfully!!!')
-            return redirect('change_password')
+            return redirect('userauth:change_password')
         else:
             messages.info(request,'New Passwords do not match!!!')
-            return redirect('change_password')
+            return redirect('userauth:change_password')
     else:
-        return render(request,'change_password.html')
+        return render(request,'settings.html')

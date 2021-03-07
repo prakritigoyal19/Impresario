@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+	<title>Settings</title>
+	<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+  <link rel="stylesheet" href="{% static '/css/settings.css' %}">
+  <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Varela+Round" />
+	<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+<body>
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <!-- <div class="fadeIn first">
+      <img src="http://danielzawadzki.com/codepen/01/icon.svg" id="icon" alt="User Icon" />
+    </div> -->
+
+    <!-- Login Form -->
+    <form "{% url 'userauth:change_password' %}" method='post'>
+    {%csrf_token%}
+    	<h1>Change Password</h1>
+      <input type="text" id="current password" class="fadeIn second" name="cur_password" placeholder="current password">
+      <input type="text" id="new password" class="fadeIn third" name="password" placeholder="new password">
+      <input type="text" id="confirm new password" class="fadeIn fourth" name="password2" placeholder="confirm new password">
+      <input type="submit" class="fadeIn fourth" value="Done">
+     
+   <div>
+    {%for message in messages%}
+    <h3>{{message}}</h3>
+    {%endfor%}
+  </div>
+<br>
+<a class="btn btn-primary mx-10 my-10" href="{% url 'userauth:home' %}">Home</a>
+<a class="btn btn-danger mx-20 my-10" href="{% url 'userauth:logout'%}">LOGOUT</a>
+     
+    </form>
+
+  </div>
+</div>
+</body>
+</html>
