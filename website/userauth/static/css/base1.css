@@ -1,35 +1,35 @@
 /* The sidebar menu */
-.sidenav {
+/* .sidenav {
   height: 100%; /* Full-height: remove this if you want "auto" height */
-  width: 300px; /* Set the width of the sidebar */
-  position: fixed; /* Fixed Sidebar (stay in place on scroll) */
-  z-index: 1; /* Stay on top */
-  top: 0; /* Stay at the top */
-  right: 0;
-  background-color: #C5C6C7; 
-  font-family: "Varela Round";
-  overflow-x: hidden; /* Disable horizontal scroll */
-}
+  /* width: 300px; Set the width of the sidebar */
+  /* position: fixed; Fixed Sidebar (stay in place on scroll) */
+  /* z-index: 1; Stay on top */
+  /* top: 0; Stay at the top */
+  /* right: 0; */
+  /* background-color: #C5C6C7;  */
+  /* font-family: "Varela Round"; */
+  /* overflow-x: hidden; Disable horizontal scroll */
+} */
 
 /* The navigation menu links */
-.sidenav a {
+/* .sidenav a {
   padding: 6px 8px 6px 16px;
   text-decoration: none;
   font-size: 25px;
   color: #1F2833;
   display: block;
   text-align: center;
-}
+} */
 
-.sidenav {
+/* .sidenav { */
 /*  opacity: 45%;*/
-  font-weight: bold;
-}
+  /* font-weight: bold;
+} */
 
 /* When you mouse over the navigation links, change their color */
-.sidenav a:hover {
+/* .sidenav a:hover {
   color: #0B0C10;
-}
+} */
 
 /* Style page content */
 .main {
@@ -51,7 +51,7 @@ background-color: #0f0f0f;
 }
 .nav {
   font-size: 16px;
-  padding-right: 
+
   font-weight: bold;
   font-family: "Varela Round";
 }
@@ -68,7 +68,7 @@ h2 {
   font-family: "Varela Round";
 }
 p {
-  font-size: 30px;
+  font-size: 20px;
   left: 0px;
   padding-left: 10px;
   color: #5EAE9B;

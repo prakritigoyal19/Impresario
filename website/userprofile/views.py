@@ -15,7 +15,7 @@ def create_team(request,par_id) :
         warning = ''
         if request.method == 'POST':
             team_name = request.POST['team_name']
-            members = request.POST.getlist('team_mem')
+            members = request.POST.getlist('checks')
             user=request.user
             description = request.POST['description']
             if Organization.objects.filter(name = team_name,parent_org__id = par_id).exists():
@@ -40,7 +40,7 @@ def create_new_team(request):
         warning = ''
         if request.method == 'POST':
             team_name = request.POST['team_name']
-            members = request.POST.getlist('team_mem')
+            members = request.POST.getlist('checks')
             user=request.user
             description = request.POST['description']
             if Organization.objects.filter(name = team_name,parent_org__id = None).exists():
