@@ -45,7 +45,7 @@ def logout_user(request):
     if request.user.is_authenticated:
         logout(request)
       
-    return redirect('/userauth/')
+    return redirect('/userauth')
 
 
 def home(request):
@@ -54,12 +54,16 @@ def home(request):
         print(account) 
         return render(request,'home.html',{'account':account})
     else:
-        return redirect('/userauth/login')
+        return render(request,'index.html')
 
 def menu(request):
-    return render(request,'account_settings.html')
-
+    if request.user.is_authenticated:
+        return render(request,'account_settings.html',{'user':request.user})
+    else:
+        return redirect('/userauth/login')
 def change_password(request):
+    if not request.user.is_authenticated:
+         return redirect('/userauth/login')
     if request.method=='POST':
         cur_pwd=request.POST['cur_password']
         pwd=request.POST['password']

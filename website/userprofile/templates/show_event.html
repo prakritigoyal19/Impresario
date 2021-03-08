@@ -8,25 +8,28 @@ Show Event
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 {% load static %}
 {% block body %}
- <h1> {{ event.title}}</h1>
- <h3>Org: {{event.organization.name}} </h3>
- <h6> -{{ event.location}}</h6>
- <h6> -{{ event.start_time}}</h6>
- <h6> -{{ event.end_time}}</h6>
+<div class="container fadeIn text-center" style="background-color:#f2d9d91c">
+ <h1 class="text-center" style="color:white;"> {{ event.title}}</h1>
+ <h3 class="text-center" style="color:white;">Organization: {{event.organization.name}} </h3>
+ <h6 class="text-center" style="color:white;"> Location: {{ event.location}}</h6>
+ <h6 class="text-center" style="color:white;"> Start: {{ event.start_time}}</h6>
+ <h6 class="text-center" style="color:white;">End: {{ event.end_time}}</h6>
  
- <p>
+ <p class="text-center" style="color:white;">
   <strong>
   Description:
   </strong>
+  <br>
   {{ event.description}}
   </p>
  
- <h3>Attendees: </h3>
- <ul>
+ <h3 class="text-center" style="color:white;">Attendees: </h3>
+ <ul class="text-center" style="color:white;">
     {% for a in attendees %}
-    <li> {{ a.username}} </li>
+    <li class="text-center" style="color:white;"> {{ a.username}} </li>
     {% endfor %}
  </ul>
 
- <a href = "/userprofile/edit_event/{{event.id}}"> Edit Event</a>
+ <a class="text-center btn btn-primary mx-10 my-10" href = "/userprofile/edit_event/{{event.id}}"> Edit Event</a>
+ </div>
 {% endblock %}

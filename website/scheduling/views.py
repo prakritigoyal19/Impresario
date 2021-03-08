@@ -7,6 +7,9 @@ from .models import Organization,Membershiplevel
 
 #builds the org_tree
 def org_tree(request):
+    if not request.user.is_authenticated:
+        return redirect('/userauth/login')
+
     queryset_roles = Membershiplevel.objects.filter(user__username = request.user.username)
     queryset = Organization.objects.all()
     
@@ -47,7 +50,7 @@ def org_tree(request):
         for j in adj[i]:
             print(j,end = " ")
 
-    return render(request,'org_tree.html',{'listo':listo})
+    return render(request,'org_tree.html',{'listo':listo,'user':request.user})
 
 #makes a list to be passed in the context to org_tree.html
 def make_listo(node,adj,name_dict,depth,listo):
@@ -61,4 +64,4 @@ def orgdetail(request,org_id):
     child_org = Organization.objects.filter(parent_org = org_id)
     members = Membershiplevel.objects.filter(organization = org)
     print(child_org)
-    return render(request,'orgdetail.html',{'child_org':child_org, 'org':org, 'par_id':org_id, "members":members})
+    return render(request,'orgdetail.html',{'child_org':child_org, 'org':org, 'par_id':org_id, "members":members,'user':request.user})

@@ -8,6 +8,7 @@ html {
 body {
   font-family: "Varela Round";
   height: 100vh;
+  
 }
 
 a {
@@ -97,7 +98,7 @@ h2.active {
 
 /* FORM TYPOGRAPHY*/
 
-input[type=button], input[type=submit], input[type=reset]  {
+input[type=button], input[type=submit], input[type=reset], button[type=submit]  {
   background-color: #40E0D0;
   border: none;
   color: white;
@@ -121,11 +122,11 @@ input[type=button], input[type=submit], input[type=reset]  {
   transition: all 0.3s ease-in-out;
 }
 
-input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover {
+input[type=button]:hover, input[type=submit]:hover, input[type=reset]:hover, button[type=submit]:hover {
   background-color: #39ace7;
 }
 
-input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
+input[type=button]:active, input[type=submit]:active, input[type=reset]:active , button[type=submit] {
   -moz-transform: scale(0.95);
   -webkit-transform: scale(0.95);
   -o-transform: scale(0.95);
@@ -133,7 +134,7 @@ input[type=button]:active, input[type=submit]:active, input[type=reset]:active {
   transform: scale(0.95);
 }
 
-input[type=text], input[type=password] {
+input[type=text], input[type=password], input[type=date], input[type=time], textarea   {
   background-color: #f6f6f6;
   border: none;
   color: #0d0d0d;
@@ -155,12 +156,12 @@ input[type=text], input[type=password] {
   border-radius: 5px 5px 5px 5px;
 }
 
-input[type=text]:focus, input[type=password]:focus {
+input[type=text]:focus, input[type=password]:focus, input[type=date]:focus, input[type=time]:focus, textarea:focus{
   background-color: #fff;
   border-bottom: 2px solid #5fbae9;
 }
 
-input[type=text]:placeholder, input[type=password]:placeholder {
+input[type=text]:placeholder, input[type=password]:placeholder, input[type=date]:placeholder, input[type=time]:placeholder, textarea:placeholder{
   color: #cccccc;
 }
 

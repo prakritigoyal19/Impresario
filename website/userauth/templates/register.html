@@ -111,11 +111,18 @@
 {% block title %}Register {% endblock %}
 
 {% block active %} 
-  <li class="active"><a href="{% url 'userauth:home' %}">HOME</a></li>
-  <li><a href="/scheduling">EXISTING TEAMS</a></li>  
-  <li><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
-  {% comment %} <li><a href="{% url 'team_request' par_id %}">TEAM REQUESTS</a></li> {% endcomment %}
-  <li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+ <li><a href="{% url 'userauth:home' %}">HOME</a></li>
+    {% if user.is_authenticated %}
+      <li class="active"><a href="/scheduling">EXISTING TEAMS</a></li>  
+      <li><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
+      {% comment %} <li><a href="{% url 'team_request' par_id %}">TEAM REQUESTS</a></li> {% endcomment %}
+      <li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+      {% else %}
+     
+      <li><a href="/userauth/login">Login</a></li>  
+      <li><a href="/userauth/register">Register</a></li>
+      {% comment %} <li><a href="{% url 'team_request' par_id %}">TEAM REQUESTS</a></li> {% endcomment %}
+     {% endif%}
 {% endblock %}
 
 {% block body %}
@@ -141,11 +148,12 @@
         {% endif %}    
     
     <form action="{% url 'userauth:register' %}" method="POST">
+    {% csrf_token %}
       <input required type="text" id="name" class="fadeIn second" name="username" placeholder="username">
       <input required type="text" id="name" class="fadeIn third" name="fname" placeholder="First Name">
       <input required type="text" id="name" class="fadeIn third" name="lname" placeholder="Last Name">
       <input required type="text" id="email-id" class="fadeIn third" name="email" placeholder="email id">
-      <input required type="password" id="enter password" class="fadeIn fourth" name="password1" placeholder="enter password">
+      <input required type="password" id="enter password" class="fadeIn fourth" name="password" placeholder="enter password">
       <input required type="password" id="confirm password" class="fadeIn fifth" name="password2" placeholder="confirm password">
 		 <input type="text" id="phone number" class="fadeIn sixth" name="phone" placeholder="phone number">
     <br><br>

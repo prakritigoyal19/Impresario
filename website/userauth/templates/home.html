@@ -10,32 +10,35 @@
 {% endblock %}
 
 {% block body %}
-      <div class="container" > 
-        <h1 >Welcome to Impresario!!</h1>
-        <h3>
+      <div class="container fadeIn" style="background-color:#f2d9d91c" > 
+        <h1 class="text-center" style="color:white">Welcome to Impresario!!</h1>
+        {% comment %} <h3>
         {{account.user.username}}
         </h3>
         <h3>
         {{account.user.email}}
         </h3>
-        <br>
+        <br> {% endcomment %}
         <h3>
-        {{account.profile.first_name}} {{account.profile.last_name}}
+        Hello {{account.profile.first_name}} {{account.profile.last_name}}, 
+
         </h3>
+        <h3 style="color:white">
+        Hope you're doing well!! We present to you Impresario, your go-to appiation to keep track of your events and your organisations. You can create an organisation with any no. of users you want. You along with other members can create a sub org which whill be a chuld of the org that you hve created. Each organization can have any no. of events and all of those events will be stored in the calendar and all the attendees for an event get a google calendar invitations. You can view the club calendar in the calendars page to see all the events.     
+        </h3>
+        <a href="/scheduling" style ="color:white; font-size:1.2em;">  See all Organisations</a>
+        <br>
+        <a href="{% url 'new_team' %}" style ="color:white; font-size:1.2em;">  Create your own organisation</a>
+
         <br>
 
-        <h3>
+        {% comment %} <h3>
         {{account.profile.phone_number}} 
         </h3>
         <br>
         <h3>
         {{account.profile.gender}} 
-        </h3>
-
-        <a class="btn btn-primary mx-10 my-10" href="{% url 'userauth:menu' %}">Account Settings</a>
-        <a class="btn btn-danger mx-20 my-10" href="{% url 'userauth:logout' %}">LOGOUT</a>
-        <br>
-        <a class="btn btn-success mx-20 my-10" href="/scheduling">Organisations</a>
+        </h3> {% endcomment %}
       </div>
 
 {% endblock %}

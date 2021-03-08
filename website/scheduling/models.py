@@ -62,7 +62,7 @@ class Membershiplevel(models.Model):
                     m = self.objects.create(user=member,organization=org,hierarchy=role_in_par.hierarchy,role=role_in_par.role)
 
             else:
-                role_in_par=self.objects.get(user_id=member.id)
+                # role_in_par=self.objects.get(user_id=member.id)
                 if u == member.id :
                     m = self.objects.create(user=member,organization=org,hierarchy=1,role=1)
                 else:

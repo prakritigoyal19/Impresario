@@ -30,7 +30,7 @@ def create_team(request,par_id) :
                 Teamrequest.create_team_req(user,team_name,description,par_id,members) #If user is a participant
                 warning = "team request sent to admin"
         memberships = Membershiplevel.objects.filter(organization__id = par_id)
-        return render(request,'create_team.html',{'memberships':memberships,'warning':warning},)
+        return render(request,'create_team.html',{'memberships':memberships,'warning':warning,'user':request.user},)
     else:
         return redirect('/userauth/login')
 
@@ -53,7 +53,7 @@ def create_new_team(request):
                 warning = "team created"
         memberships = Membershiplevel.objects.all()
         print(memberships)
-        return render(request,'create_team.html',{'memberships':memberships,'warning':warning},)
+        return render(request,'create_team.html',{'memberships':memberships,'warning':warning,'user':request.user},)
     else:
         return redirect('/userauth/login')
 
@@ -65,7 +65,7 @@ def team_request(request, par_id) :
         sub_org = Membershiplevel.get_subgroups(all_sub_org, user)
         tr_request = Teamrequest.objects.filter(par_org__in = sub_org, status = 2) 
         print(tr_request) 
-        return render(request,'team_request.html',{'team_request':tr_request })
+        return render(request,'team_request.html',{'team_request':tr_request,'user':request.user })
     else:
         return redirect('/userauth/login')
 
@@ -103,7 +103,7 @@ def show_team(request, team_id):
         children = Organization.get_all_children(org)
         members = Membershiplevel.objects.filter(organization__id = org.id)
         print(org.event.all())
-        return render(request, 'show_team.html',{"org": org, "children": children, "members": members})
+        return render(request, 'show_team.html',{"org": org, "children": children, "members": members,'user':request.user})
     else:
         return redirect('/userauth/login')
 
@@ -151,17 +151,13 @@ def add_event(request, org_id):
                 attendees.append({"email": user.email})
             event = google_create_event(location, title, description, start,end,"tentative", attendees)
             if event['id']:
-                start = datetime.datetime.fromisoformat(event['start']['dateTime'])
-                end = datetime.datetime.fromisoformat(event['end']['dateTime'])
-                print(start)
-                print(end)
                 new_event = Event.objects.create(organization = org, title= title, description= description, location = location, start_time = start, end_time = end, status = 0, eventId = event['id'] )
                 new_event.save()
-                return render(request,"add_event.html",{"warning": "Success", "org":org})
+                return render(request,"add_event.html",{"warning": "Success", "org":org,'user':request.user})
             else:
-                return render(request,"add_event.html",{"warning": "Failure","org":org })
+                return render(request,"add_event.html",{"warning": "Failure","org":org,'user':request.user })
         else:
-            return render(request, 'add_event.html', {"org": org})
+            return render(request, 'add_event.html', {"org": org,'user':request.user})
     else:
         return redirect('/userauth/login')
 
@@ -175,7 +171,7 @@ def view_event(request, event_id):
         return redirect('userprofile/view_team/1')
     members = Membershiplevel.objects.filter(organization = event.organization.id).values('user')
     attendees = User.objects.filter(pk__in = members)
-    return render(request,'show_event.html', {'event': event , 'attendees': attendees})
+    return render(request,'show_event.html', {'event': event , 'attendees': attendees,'user':request.user})
 
 def update_event(request,event_id):
     if not request.user.is_authenticated:
@@ -208,7 +204,7 @@ def update_event(request,event_id):
         updated_event  = google_update_event(event.eventId, title, description, location, start, end, status)
         # print(updated_event)
         if not updated_event.get('id'):
-            return render(request, 'update_event.html', {"event": event})
+            return render(request, 'update_event.html', {"event": event,'user':request.user})
 
         event.eventId = updated_event['id']
         event.title = updated_event['summary']
@@ -222,9 +218,9 @@ def update_event(request,event_id):
             event.status=2
        
         
-        event.start_time = datetime.datetime.fromisoformat(updated_event['start']['dateTime'])
+        event.start_time = start
              
-        event.end_time =  datetime.datetime.fromisoformat(updated_event['end']['dateTime'])
+        event.end_time =  end
         print("event.start_time")
         print(event.start_time)
         print("event.end_time")
@@ -232,7 +228,9 @@ def update_event(request,event_id):
         print(event)
         event.save()
         return redirect('/userprofile/view_event/'+str(event.id))
-    return render(request, 'update_event.html', {"event": event})
+    return render(request, 'update_event.html', {"event": event,'user':request.user})
 
 def view_calendar(request):
-    return render(request,'calendar.html')
+    if not request.user.is_authenticated:
+        return redirect('/userauth/login')
+    return render(request,'calendar.html',{'user':request.user})

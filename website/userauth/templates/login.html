@@ -4,11 +4,18 @@
 {% block title %}Login {% endblock %}
 
 {% block active %} 
-<li class="active"><a href="{% url 'userauth:home' %}">HOME</a></li>
-<li ><a href="/scheduling">EXISTING TEAMS</a></li>  
-<li><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
-{% comment %} <li><a href="{% url 'team_request' par_id %}">TEAM REQUESTS</a></li> {% endcomment %}
-<li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+<li><a href="{% url 'userauth:home' %}">HOME</a></li>
+    {% if user.is_authenticated %}
+      <li class="active"><a href="/scheduling">EXISTING TEAMS</a></li>  
+      <li><a href="{% url 'new_team' %}">CREATE TEAM</a></li>
+      {% comment %} <li><a href="{% url 'team_request' par_id %}">TEAM REQUESTS</a></li> {% endcomment %}
+      <li><a href="{% url 'view_calendar' %}">CALENDAR</a></li>
+      {% else %}
+     
+      <li><a href="/userauth/login">Login</a></li>  
+      <li><a href="/userauth/register">Register</a></li>
+      {% comment %} <li><a href="{% url 'team_request' par_id %}">TEAM REQUESTS</a></li> {% endcomment %}
+     {% endif%}
 {% endblock %}
 
 {% block body %}
