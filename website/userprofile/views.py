@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse, JsonResponse
 from django.contrib.auth.models import User
 from scheduling.models import Organization,User,Membershiplevel,Teamrequest, Event
+from userauth.models import Account
 from gsetup import service, google_create_event, google_update_event  
 import datetime
 from .utils import is_time_between
@@ -49,10 +50,8 @@ def create_new_team(request):
                 org = Organization.objects.create(name = team_name,parent_org_id = None)
                 members = User.objects.filter(pk__in = members)
                 Membershiplevel.create_team(members,org,None,request.user.id)
-                #Membershiplevel.create_team(members,org,par_id)
                 warning = "team created"
-        memberships = Membershiplevel.objects.all()
-        print(memberships)
+        memberships = Account.objects.all()
         return render(request,'create_team.html',{'memberships':memberships,'warning':warning,'user':request.user},)
     else:
         return redirect('/userauth/login')
