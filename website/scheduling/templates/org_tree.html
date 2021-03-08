@@ -8,11 +8,15 @@
 
 
 {% block body %}{% load my_filter %}
+<h1 class="text-center" style="color:white"> Organization and their Hierarchy</h1>
+<div class="container fadeIn" style="background-color:#f2d9d91c">
 
 {% for org in listo %} 
-    {{""|indent_it:org.1}}<a href="{% url 'orgDetail' org.2 %}">{{org.0}}</a>
+    {{""|indent_it:org.1}}
+    <a  class = "btn btn-danger" style = "margin:5px;"href="{% url 'orgDetail' org.2 %}">{{org.0}}</a>
     <br>
 {% endfor %}
-<a href = "{% url 'new_team' %}" > Create New Team </a>
+<a href = "{% url 'new_team' %}" style="color:white; font-size:1.5rem;"> Create New Team </a>
+</div>
 
 {% endblock %}

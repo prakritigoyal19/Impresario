@@ -2,41 +2,46 @@
 {% block title %} Create team {% endblock %}
 {% load static%}
 {% block body %}
-<a href="{% url 'userauth:logout' %}">logout</a>
-    <h1>{{org}}</h1>
+{% comment %} <a href="{% url 'userauth:logout' %}">logout</a> {% endcomment %}
+<div class="container text-center fadeIn" style="background-color:#f2d9d91c">
+    <h1 class="text-center" style="color:white; font-size:3.0em;">{{org}}</h1>
+<h1 class="text-center" style="color:white; font-size:2.0em;">
+Children
+</h1>
     {% for child in child_org %}
-    <a href="{% url 'orgDetail' child.id %}">{{child.name}}</a>
+    <a class="text-center" style="color:white;" href="{% url 'orgDetail' child.id %}">{{child.name}}</a>
     <br>
     {% endfor %}
-    <h3> Members: </h3>
-</ul>
-
+    <h3 class="text-center"> Members: </h3>
+<ul class="text-center">
 {% for m in members %}
     {% if m.role == 1 %}
-    <li>{{m.user.username}} (Admin) </li>
+    <li style="color:white;" class="text-center">{{m.user.username}} (Admin) </li>
     {% else %}
-    <li>{{m.user.username}}</li>
+    <li style="color:white;" class="text-center">{{m.user.username}}</li>
     {% endif %}
 {% endfor %} 
 </ul>
 
-<h3> Upcoming Events: </h3>
-</ul>
+<h3 class="text-center"> Upcoming Events: </h3>
+</ul class="text-center">
 
 {% for e in org.event.all %}
     
-    <li>
-    <a href = "/userprofile/view_event/{{ e.id }}">
+    <li style="color:white;">
+    <a style="color:white;" href = "/userprofile/view_event/{{ e.id }}">
     {{ e.title}}
     </a>
-    </li>
+    </li >
 {% endfor %} 
-</ul>
-    <a href = "/userprofile/{{ org.id }}/add_event">
-    Add event 
-    </a>
 <br>
-<a href="{% url 'team_request' par_id %}">team requests</a>
-<br>    
-<a href="{% url 'create_team' par_id %}">create_team</a>
+<br>
+<br>
+</ul style="color:white;">
+<div class="d-flex flex-row justify-content-around">
+<a class="btn btn-primary mx-10 my-10" href = "/userprofile/{{ org.id }}/add_event">Add event </a>
+<a class="btn btn-primary mx-10 my-10" href="{% url 'team_request' par_id %}">team requests</a>    
+<a class="btn btn-primary mx-10 my-10" href="{% url 'create_team' par_id %}">create_team</a>
+</div>
+</div>
 {% endblock %}
