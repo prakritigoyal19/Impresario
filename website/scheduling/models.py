@@ -31,6 +31,15 @@ class Organization(models.Model):
     def delete_org(self,id):
         org = self.objects.get(pk=id)
         org.delete()
+    @classmethod
+    def update_team(self,old_team_name,team_name,description,par_id):
+        if par_id is not None:
+            p = self.objects.get(parent_org=par_id,name=old_team_name)
+        else:
+            p=self.objects.get(name = old_team_name)
+        p.name = team_name
+        # p.team_description = description
+        p.save(update_fields=['name'])
         
 class Groups(models.Model):
     organization = models.ForeignKey(Organization,null=True, on_delete = models.CASCADE, related_name = 'parent')
@@ -116,6 +125,17 @@ class Membershiplevel(models.Model):
                 q = member.user.id
                 break
         return q
+
+    @classmethod
+    def edit_team(self, ex_members, new_members, org, par_id, u):
+        for member in new_members:
+            if member not in ex_members:
+                if par_id is not None:
+                    role_in_par=self.objects.get(user=member,organization_id=par_id)
+                    m = self.objects.create(user=member,organization_id=org,hierarchy=role_in_par.hierarchy,role=role_in_par.role)
+                else:
+                    m = self.objects.create(user=member,organization_id=org,hierarchy=1,role=2)
+
 
 class Teamrequest(models.Model):
     REJECTED=0
