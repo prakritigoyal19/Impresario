@@ -1,7 +1,7 @@
 {% extends 'adminbase.html' %} 
 <!DOCTYPE html>
 {% load static %}
-{% block title %} Create team {% endblock %}
+{% block title %} Edit team {% endblock %}
 
 {% block active %} <li><a href="{% url 'userauth:home' %}">HOME</a></li>
       <li ><a href="/scheduling">EXISTING TEAMS</a></li>  
@@ -14,7 +14,7 @@
 
 <div class="wrapper fadeInDown">
   <div id="formContent">
-  <h1> Create Team </h1>
+  <h1> Edit Team </h1>
 <form method="post" >
   {% csrf_token %}
   <input type="text" id="team_name" name="team_name" class = "fadeIn second" placeholder="Team Name" value = "{{org.team_name}}" required /><br />

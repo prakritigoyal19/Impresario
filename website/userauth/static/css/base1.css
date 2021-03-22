@@ -51,10 +51,12 @@
 .navbar {
 background-color: #0f0f0f;
   border-radius: 0px;
+  font-size: 1.75rem;
+  padding: 4px;
 }
 .nav {
-  font-size: 16px;
-
+  font-size: 1.75rem;
+  padding: 4px;
   font-weight: bold;
   font-family: "Varela Round";
 }
@@ -65,7 +67,7 @@ body {
   
   opacity: 0.9;
 }
-body::before{
+/* body::before{
   content: "";
   position: absolute;
   left: 0px;
@@ -78,7 +80,7 @@ body::before{
   z-index: -1;
   height: 1000px;
   width: 100%;
-}
+} */
 h2 {
   font-size: 46px;
   text-align: left;
