@@ -40,8 +40,16 @@ Children
 </ul style="color:white;">
 <div class="d-flex flex-row justify-content-around">
 <a class="btn btn-primary mx-10 my-10" href = "/userprofile/{{ org.id }}/add_event">Add event </a>
-<a class="btn btn-primary mx-10 my-10" href="{% url 'team_request' par_id %}">team requests</a>    
+{% ifequal role 1 %}
+<a class="btn btn-primary mx-10 my-10" href="{% url 'team_request' par_id %}">team requests</a> 
+{% endifequal %}   
 <a class="btn btn-primary mx-10 my-10" href="{% url 'create_team' par_id %}">create_team</a>
+{% ifequal role 1 %}
+<a class="btn btn-primary mx-10 my-10" href="{% url 'change_role' par_id %}">change_role</a>
+<a class="btn btn-primary mx-10 my-10" href="{% url 'dismiss_admin' par_id %}">change_roletoparticipnt</a>
+{% endifequal %}
+<a class="btn btn-primary mx-10 my-10" href="{% url 'leave_team' par_id %}">leave team</a>
+
 </div>
 </div>
 {% endblock %}

@@ -27,6 +27,10 @@ class Organization(models.Model):
             q += curr_children
             children += curr_children
         return children
+    @classmethod
+    def delete_org(self,id):
+        org = self.objects.get(pk=id)
+        org.delete()
         
 class Groups(models.Model):
     organization = models.ForeignKey(Organization,null=True, on_delete = models.CASCADE, related_name = 'parent')
@@ -80,6 +84,38 @@ class Membershiplevel(models.Model):
             except self.DoesNotExist :
                 continue
         return subgroups
+
+    @classmethod
+    def change_role(self , members, org_id):
+        for member in members:
+            p = self.objects.get(organization_id = org_id , user_id = member.id)
+            p.role = 1
+            p.save(update_fields=['role'])
+            print(p.role)
+
+    @classmethod
+    def change_role_participant(self , members, org_id):
+        for member in members:
+            p = self.objects.get(organization_id = org_id , user_id = member.id)
+            p.role = 2
+            p.save(update_fields=['role'])
+            print(p.role)
+
+    @classmethod
+    def leave_team(self,member,org_id):
+        p = self.objects.get(organization_id = org_id, user_id = member.id)
+        p.delete()
+
+    @classmethod
+    def random_fun(self,members,org_id,u):
+        q=0
+        for member in members:
+            if u==member.user.id:
+                continue
+            else:
+                q = member.user.id
+                break
+        return q
 
 class Teamrequest(models.Model):
     REJECTED=0
