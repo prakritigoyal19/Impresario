@@ -47,6 +47,7 @@ Children
 {% ifequal role 1 %}
 <a class="btn btn-primary mx-10 my-10" href="{% url 'change_role' par_id %}">change_role</a>
 <a class="btn btn-primary mx-10 my-10" href="{% url 'dismiss_admin' par_id %}">change_roletoparticipnt</a>
+<a class="btn btn-primary mx-10 my-10" href="{% url 'edit_team' par_id %}">edit_team</a>
 {% endifequal %}
 <a class="btn btn-primary mx-10 my-10" href="{% url 'leave_team' par_id %}">leave team</a>
 
