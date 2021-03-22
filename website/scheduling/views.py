@@ -11,6 +11,7 @@ def org_tree(request):
         return redirect('/userauth/login')
 
     queryset_roles = Membershiplevel.objects.filter(user__username = request.user.username)
+    print(queryset_roles)
     queryset = Organization.objects.all()
     
     adj = [[] for i in range(len(queryset)+1)]
@@ -63,5 +64,6 @@ def orgdetail(request,org_id):
     org =  Organization.objects.get(pk = org_id)
     child_org = Organization.objects.filter(parent_org = org_id)
     members = Membershiplevel.objects.filter(organization = org)
+    role = Membershiplevel.objects.get(organization__id = org_id, user_id = request.user.id).role
     print(child_org)
-    return render(request,'orgdetail.html',{'child_org':child_org, 'org':org, 'par_id':org_id, "members":members,'user':request.user})
+    return render(request,'orgdetail.html',{'child_org':child_org, 'org':org, 'par_id':org_id, "members":members,'user':request.user, 'role':role})
