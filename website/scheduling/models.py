@@ -5,6 +5,7 @@ from django.contrib.auth.models import User
 class Organization(models.Model):
     name = models.CharField(blank = False, max_length = 100)
     parent_org = models.ForeignKey('self',default = None, null = True, blank = True, on_delete = models.CASCADE)
+    description = models.CharField(max_length=500)
     def __str__(self):
         if self.parent_org:
             parent = "-"+self.parent_org.name
@@ -38,8 +39,8 @@ class Organization(models.Model):
         else:
             p=self.objects.get(name = old_team_name)
         p.name = team_name
-        # p.team_description = description
-        p.save(update_fields=['name'])
+        p.description = description
+        p.save(update_fields=['name','description'])
         
 class Groups(models.Model):
     organization = models.ForeignKey(Organization,null=True, on_delete = models.CASCADE, related_name = 'parent')

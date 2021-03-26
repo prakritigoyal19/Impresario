@@ -1,13 +1,14 @@
 from datetime import datetime, time
+from django.utils import timezone
 import pytz
 
 utc=pytz.UTC
 def is_time_between(begin_time, end_time, check_time=None):
     # If check time is not given, default to current UTC time
-    check_time = check_time or datetime.utcnow().time()
-    begin_time.replace(tzinfo=utc)
-    end_time.replace(tzinfo=utc)
-    check_time.replace(tzinfo=utc)
+    check_time = check_time
+    # begin_time.replace(tzinfo=utc)
+    # end_time.replace(tzinfo=utc)
+    # check_time.replace(tzinfo=utc)
     print(begin_time)
     print(end_time)
     print(check_time)

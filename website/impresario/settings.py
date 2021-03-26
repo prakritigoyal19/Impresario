@@ -81,9 +81,9 @@ WSGI_APPLICATION = 'impresario.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'Impresario',
-        'USER': 'postgres',
-        'PASSWORD':'1234',
+        'NAME': 'Impressario',
+        'USER': 'aritra',
+        'PASSWORD':'admin',
 
         'HOST':'localhost',
     }
