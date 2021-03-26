@@ -11,22 +11,19 @@
 {% endblock %}
 
 {% block body %}
-
 <div class="wrapper fadeInDown">
   <div id="formContent">
   <h1> Edit Team </h1>
 <form method="post" >
   {% csrf_token %}
-  <input type="text" id="team_name" name="team_name" class = "fadeIn second" placeholder="Team Name" value = "{{org.team_name}}" required /><br />
+  <input type="text" id="team_name" name="team_name" class = "fadeIn second" placeholder="Team Name" value = "{{org.name}}" required /><br />
   <textarea
     name="description"
     id="description"
     cols="30"
     rows="5"
-    placeholder="team description"
-    value = "{{org.description}}"
     class = "fadeIn second"
-  >  </textarea> <br />
+  > {{org.description}}</textarea> <br />
   <label for="team_members">Team members:</label><br />
   <div id="team_members" multiple="true" name="checks"></div>
   <br />

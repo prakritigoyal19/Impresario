@@ -259,8 +259,8 @@ def edit_team(request, org_id) :
             memberships = Account.objects.all()
         else:
             memberships = Membershiplevel.objects.filter(organization__id=par_id)
-            
-        return render(request, 'edit_team.html',{'memberships': memberships, 'warning':warning, 'user': request.user},)
+        organisation  = Organization.objects.get(pk = org_id)    
+        return render(request, 'edit_team.html',{'memberships': memberships,'org': organisation, 'warning':warning, 'user': request.user},)
     else:
         return redirect('/userauth/login')
 
@@ -314,31 +314,29 @@ def add_event(request, org_id):
             start_time = request.POST['start-time']
             end_date = request.POST['end-date']
             end_time = request.POST['end-time']
-            start = str(start_date) +" "+str(start_time)
-            end = str(end_date) +" "+str(end_time)
+            start = str(start_date) +" "+str(start_time) + '+00:00'
+            end = str(end_date) +" "+str(end_time)+ '+00:00'
             title = request.POST['title']
-            start = datetime.datetime.strptime(start, "%Y-%m-%d %H:%M")
-            end= datetime.datetime.strptime(end, "%Y-%m-%d %H:%M")
-            start.replace(tzinfo=utc)
-            start = pytz.utc.localize(start)
-            end.replace(tzinfo=utc)
-            end = pytz.utc.localize(end)
+            start = datetime.datetime.strptime(start, "%Y-%m-%d %H:%M%z")
+            end= datetime.datetime.strptime(end, "%Y-%m-%d %H:%M%z")
+            if start>=end:
+                return render(request,"add_event.html",{"warning": "Invalid time and/or inputs", "org":org,'user':request.user})
             description = request.POST['description']
             location = request.POST['location']
             all_events = Event.objects.all()
             clash_events = []
-            # for e in all_events:
-            #     if is_time_between(start,end, e.start_time) or is_time_between(start,end, e.end_time) or is_time_between(e.start_time,e.end_time, end) or is_time_between(e.start_time,e.end_time, start):
-            #         clash_events.append(e)
+            for e in all_events:
+                if is_time_between(start,end, e.start_time) or is_time_between(start,end, e.end_time) or is_time_between(e.start_time,e.end_time, end) or is_time_between(e.start_time,e.end_time, start):
+                    clash_events.append(e)
 
             members = Membershiplevel.objects.filter(organization = org).values('user')
     
-            # for c in clash_events:
-            #     org2  = c.organization
-            #     mem2 = Membershiplevel.objects.filter(organization = org2).values('user')
-            #     for m in mem2:
-            #         if m in members:
-            #             return render(request,'add_event.html',{"warning": "Clashes!!!!","org":org})
+            for c in clash_events:
+                org2  = c.organization
+                mem2 = Membershiplevel.objects.filter(organization = org2).values('user')
+                for m in mem2:
+                    if m in members:
+                        return render(request,'add_event.html',{"warning": "Clashes!!!!","org":org})
             attendees = []
            
             for m in members:
